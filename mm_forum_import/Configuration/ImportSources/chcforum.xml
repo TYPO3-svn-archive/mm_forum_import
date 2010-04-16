@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<mmforum_import>
+	<software>
+		<name>CHC Forum</name>
+		<icon>EXT:mm_forum_import/Resources/Public/SoftwareIcons/chcforum.png</icon>
+		<importSource>database</importSource>
+	</software>
+	<databaseRequirement>
+		<options>
+			<option name="queryPrefix">no</option>
+		</options>
+		<requiredTables>
+			<table>tx_chcforum_category</table>
+			<table>tx_chcforum_conference</table>
+			<table>tx_chcforum_thread</table>
+			<table>tx_chcforum_thread</table>
+			<table>tx_chcforum_post</table>
+			<table>tx_chcforum_forumgroup</table>
+		</requiredTables>
+		<truncateTables>
+			<table>fe_groups</table>
+			<table>tx_mmforum_attachments</table>
+			<table>tx_mmforum_cache</table>
+			<table>tx_mmforum_favorites</table>
+			<table>tx_mmforum_forummail</table>
+			<table>tx_mmforum_forums</table>
+			<table>tx_mmforum_post_alert</table>
+			<table>tx_mmforum_postparser</table>
+			<table>tx_mmforum_postqueue</table>
+			<table>tx_mmforum_posts</table>
+			<table>tx_mmforum_posts_text</table>
+			<table>tx_mmforum_postsread</table>
+			<table>tx_mmforum_searchresults</table>
+			<table>tx_mmforum_topicmail</table>
+			<table>tx_mmforum_topics</table>
+			<table>tx_mmforum_wordlist</table>
+			<table>tx_mmforum_wordmatch</table>
+		</truncateTables>
+	</databaseRequirement>
+	<import>
+		<importerClass>Tx_MmForumImport_Domain_Service_Import_ChcForum</importerClass>
+		<importItems>
+			<importItem>forums</importItem>
+			<importItem>topics</importItem>
+			<importItem>posts</importItem>
+		</importItems>
+	</import>
+	<fileImport>
+		<options>
+			<option name="enable">yes</option>
+		</options>
+		<allowedInterfaces>
+			<interface>local</interface>
+			<interface>ftp</interface>
+		</allowedInterfaces>
+		<clearDirectories>
+			<directory>uploads/tx_mmforum/</directory>
+		</clearDirectories>
+	</fileImport>
+</mmforum_import>

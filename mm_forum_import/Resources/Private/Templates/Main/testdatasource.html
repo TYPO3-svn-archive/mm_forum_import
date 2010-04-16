@@ -1,0 +1,71 @@
+{namespace mmfi=Tx_MmForumImport_ViewHelpers}
+
+<p><f:translate key="testdatasource.intro" /></p>
+
+<table class="mm_forum-list" cellspacing="0" cellpadding="2" style="width:100%">
+	<tr>
+		<td colspan="2" class="mm_forum-listrow_header" style="padding-left: 6px;">
+			<mmfi:image src="EXT:mm_forum_import/Resources/Public/Icons/filesource.png" style="vertical-align: middle; margin-right: 8px;" />
+			File interface test results
+		</td>
+	</tr>
+	<f:for each="{fileinterfaceTester.logMessages}" as="log">
+		<tr class="mm_forum-listrow" style="background-color: #{log.severityColor}">
+			<td style="width:1px;">
+				<mmfi:image src="EXT:mm_forum_import/Resources/Public/Icons/warning-{log.severity}.png" width="16" />
+			</td>
+			<td>
+				<f:translate key="{log.message}" arguments="{log.arguments}" default="{log.message}" htmlEscape="false" />
+			</td>
+		</tr>
+	</f:for>
+	<f:if condition="{fileinterfaceTester.exitStatus}">
+		<tr class="mm_forum-listrow" style="background-color: #d0ffd0">
+			<td style="width:1px;">
+				<mmfi:image src="EXT:mm_forum_import/Resources/Public/Icons/warning-3.png" width="16" />
+			</td>
+			<td>
+				<f:translate key="testfileinterface.success" arguments="{0 : configuration.importSource.softwareName}" />
+			</td>
+		</tr>
+	</f:if>
+</table>
+
+<table class="mm_forum-list" cellspacing="0" cellpadding="2" style="width:100%">
+	<tr>
+		<td colspan="2" class="mm_forum-listrow_header" style="padding-left: 6px;">
+			<mmfi:image src="EXT:mm_forum_import/Resources/Public/Icons/datasource.png" style="vertical-align: middle; margin-right: 8px;" />
+			Database connection test results
+		</td>
+	</tr>
+	<f:for each="{databaseTester.logMessages}" as="log">
+		<tr class="mm_forum-listrow" style="background-color: #{log.severityColor}">
+			<td style="width:1px;">
+				<mmfi:image src="EXT:mm_forum_import/Resources/Public/Icons/warning-{log.severity}.png" width="16" />
+			</td>
+			<td>
+				<f:translate key="{log.message}" arguments="{log.arguments}" default="{log.message}" htmlEscape="false" />
+			</td>
+		</tr>
+	</f:for>
+	<f:if condition="{databaseTester.exitStatus}">
+		<tr class="mm_forum-listrow" style="background-color: #d0ffd0">
+			<td style="width:1px;">
+				<mmfi:image src="EXT:mm_forum_import/Resources/Public/Icons/warning-3.png" width="16" />
+			</td>
+			<td>
+				<f:translate key="testdatasource.success" arguments="{0 : configuration.importSource.softwareName}" />
+			</td>
+		</tr>
+	</f:if>
+</table>
+
+<f:form action="selectImportObjects">
+	<f:form.hidden name="action" value="selectImportObjects" id="nextAction" />
+	<f:form.hidden name="controller" value="Main" />
+
+	<input type="submit" value="Back" onclick="document.getElementById('nextAction').value = 'dataSource';" />
+	<f:if condition="{allExitStatus}">
+		<input type="submit" value="Continue" onclick="document.getElementById('nextAction').value = 'selectImportObjects';" />
+	</f:if>
+</f:form>

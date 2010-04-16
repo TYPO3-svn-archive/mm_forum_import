@@ -1,0 +1,36 @@
+{namespace mmfi=Tx_MmForumImport_ViewHelpers}
+
+<p style="margin: 8px 0px">
+	<f:translate key="index.introText" />
+</p>
+
+<f:form action="dataSource" id="import-form">
+	<table class="mm_forum-list" cellspacing="0" cellpadding="2" style="width:100%">
+		<tr>
+			<td class="mm_forum-listrow_header"></td>
+			<td class="mm_forum-listrow_header"></td>
+			<td class="mm_forum-listrow_header" style="padding-left: 6px;"><f:translate key="index.tableHeader" /></td>
+		</tr>
+		<f:for each="{importSources}" as="importSource">
+			<tr class="mm_forum-listrow"
+				onmouseover="this.className='mm_forum-listrow_active';"
+				onmouseout="this.className='mm_forum-listrow';"
+				onclick="document.getElementById('configuration_{importSource.identifier}').checked = true;"
+				style="cursor: pointer" >
+				<td style="width:24px; padding:6px;" valign="middle">
+					<mmfi:image src="{importSource.softwareIcon}" />
+				</td>
+				<td style="padding: 6px; width:24px; text-align: center;" valign="middle">
+					<f:form.radio name="selectedSourceIdentifier" value="{importSource.identifier}" id="configuration_{importSource.identifier}" />
+				</td>
+				<td style="padding: 6px; font-weight: bold;" valign="middle">
+					{importSource.softwareName}
+				</td>
+			</tr>
+		</f:for>
+	</table>
+	<f:form.hidden name="startSession" value="1" />
+	<f:form.hidden name="action" value="dataSource" />
+	<f:form.hidden name="controller" value="Main" />
+</f:form>
+<input type="submit" value="{f:translate(key:'index.continue')}" onclick="document.getElementById('import-form').submit(); return false;" />

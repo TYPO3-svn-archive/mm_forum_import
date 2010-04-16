@@ -1,0 +1,90 @@
+{namespace mmfi=Tx_MmForumImport_ViewHelpers}
+
+<f:form action="testDatasource" method="post">
+	<f:if condition="{configuration.importSource.dataSourceMode} == 'database'">
+		<table class="mm_forum-list" cellspacing="0" cellpadding="2" style="width:100%">
+			<tr>
+				<td colspan="2" class="mm_forum-listrow_header" style="padding-left: 6px;">
+					<mmfi:image src="EXT:mm_forum_import/Resources/Public/Icons/datasource.png" style="vertical-align: middle; margin-right: 8px;" />
+					<f:translate key="datasource.title" />
+				</td>
+			</tr>
+			<tr class="mm_forum-listrow">
+				<td><f:translate key="datasource.database.host" /></td>
+				<td><f:form.textbox name="database[hostname]" value="{configuration.databaseSettings.hostname}" /></td>
+			</tr>
+			<tr class="mm_forum-listrow">
+				<td><f:translate key="datasource.database.username" /></td>
+				<td><f:form.textbox name="database[username]" value="{configuration.databaseSettings.username}" /></td>
+			</tr>
+			<tr class="mm_forum-listrow">
+				<td><f:translate key="datasource.database.password" /></td>
+				<td><f:form.password name="database[password]" value="{configuration.databaseSettings.password}" /></td>
+			</tr>
+			<tr class="mm_forum-listrow">
+				<td><f:translate key="datasource.database.name" /></td>
+				<td><f:form.textbox name="database[dbname]" value="{configuration.databaseSettings.databaseName}" /></td>
+			</tr>
+			<f:if condition="{configuration.importSource.hasDatabasePrefix}">
+				<tr class="mm_forum-listrow">
+					<td><f:translate key="datasource.database.prefix" /></td>
+					<td><f:form.textbox name="database[prefix]" value="{configuration.databaseSettings.prefix}" /></td>
+				</tr>
+			</f:if>
+			<tr class="mm_forum-listrow">
+				<td><f:translate key="datasource.database.driver" /></td>
+				<td><f:form.select name="database[driver]" options="{pdoDrivers}" value="{configuration.databaseSettings.driver}" /></td>
+			</tr>
+		</table>
+	</f:if>
+
+	<f:if condition="{configuration.importSource.doesRequireFileImport}">
+		<table class="mm_forum-list" cellspacing="0" cellpadding="2" style="width:100%">
+			<tr>
+				<td colspan="3" class="mm_forum-listrow_header" style="padding-left: 6px;">
+					<mmfi:image src="EXT:mm_forum_import/Resources/Public/Icons/filesource.png" style="vertical-align: middle; margin-right: 8px;" />
+					<f:translate key="filesource.title" />
+				</td>
+			</tr>
+			<tr class="mm_forum-listrow">
+				<td style="width:1px;"><f:form.radio name="fileinterface[mode]" value="local" id="fileinterface-local" checked="{configuration.fileinterfaceSettings.isLocal}" /></td>
+				<td colspan="2"><label for="fileinterface-local"><f:translate key="filesource.type.local" /></label></td>
+			</tr>
+			<tr class="mm_forum-listrow">
+				<td></td>
+				<td style="width:33%"><f:translate key="filesource.local.path" arguments="{0:configuration.importSource.softwareName}" /></td>
+				<td style="width:67%"><f:form.textbox name="fileinterface[local][path]" value="{configuration.fileinterfaceSettings.localPath}" /></td>
+			</tr>
+			<tr class="mm_forum-listrow">
+				<td style="width:1px;"><f:form.radio name="fileinterface[mode]" value="ftp" id="fileinterface-ftp" checked="{configuration.fileinterfaceSettings.isFtp}" /></td>
+				<td colspan="2"><label for="fileinterface-ftp"><f:translate key="filesource.type.ftp" /></label></td>
+			</tr>
+			<tr class="mm_forum-listrow">
+				<td></td>
+				<td><f:translate key="filesource.ftp.host" /></td>
+				<td><f:form.textbox name="fileinterface[ftp][host]" value="{configuration.fileinterfaceSettings.ftpHostname}" /></td>
+			</tr>
+			<tr class="mm_forum-listrow">
+				<td></td>
+				<td><f:translate key="filesource.ftp.username" /></td>
+				<td><f:form.textbox name="fileinterface[ftp][username]" value="{configuration.fileinterfaceSettings.ftpUsername}" /></td>
+			</tr>
+			<tr class="mm_forum-listrow">
+				<td></td>
+				<td><f:translate key="filesource.ftp.password" /></td>
+				<td><f:form.password name="fileinterface[ftp][password]" value="{configuration.fileinterfaceSettings.ftpPassword}" /></td>
+			</tr>
+			<tr class="mm_forum-listrow">
+				<td></td>
+				<td><f:translate key="filesource.ftp.path" /></td>
+				<td><f:form.textbox name="fileinterface[ftp][path]" value="{configuration.fileinterfaceSettings.ftpPath}" /></td>
+			</tr>
+		</table>
+	</f:if>
+
+	<f:form.hidden name="action" value="testDataSource" id="nextAction" />
+	<f:form.hidden name="controller" value="Main" />
+
+	<input type="submit" value="{f:translate(key:'index.back')}" onclick="document.getElementById('nextAction').value = 'index';" />
+	<input type="submit" value="{f:translate(key:'index.continue')}" onclick="document.getElementById('nextAction').value = 'testDataSource';" />
+</f:form>

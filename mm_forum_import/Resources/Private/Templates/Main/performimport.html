@@ -1,0 +1,30 @@
+{namespace mmfi=Tx_MmForumImport_ViewHelpers}
+
+<table class="mm_forum-list" cellspacing="0" cellpadding="2" style="width:100%">
+	<tr>
+		<td colspan="2" class="mm_forum-listrow_header" style="padding-left: 6px;">
+			<mmfi:image src="EXT:mm_forum_import/Resources/Public/Icons/filesource.png" style="vertical-align: middle; margin-right: 8px;" />
+			File interface test results
+		</td>
+	</tr>
+	<f:for each="{importer.logMessages}" as="log">
+		<tr class="mm_forum-listrow" style="background-color: #{log.severityColor}">
+			<td style="width:1px;">
+				<mmfi:image src="EXT:mm_forum_import/Resources/Public/Icons/warning-{log.severity}.png" width="16" />
+			</td>
+			<td>
+				{log.message}
+			</td>
+		</tr>
+	</f:for>
+	<f:if condition="{fileinterfaceTester.exitStatus}">
+		<tr class="mm_forum-listrow" style="background-color: #d0ffd0">
+			<td style="width:1px;">
+				<mmfi:image src="EXT:mm_forum_import/Resources/Public/Icons/warning-3.png" width="16" />
+			</td>
+			<td>
+				<f:translate key="import.success" arguments="{0 : configuration.importSource.softwareName}" />
+			</td>
+		</tr>
+	</f:if>
+</table>

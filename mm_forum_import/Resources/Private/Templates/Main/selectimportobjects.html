@@ -1,0 +1,54 @@
+<script type="text/javascript">
+
+function selectAll(check, mode) {
+
+	var checkboxes = document.getElementsByTagName('input');
+	for(var i in checkboxes) {
+		var checkbox = checkboxes[i];
+		if(mode == 'truncate') {
+			if(checkbox.type != 'checkbox' || !checkbox.id.match(/^truncate_table_/)) continue;
+		} else if(mode == 'clear') {
+			if(checkbox.type != 'checkbox' || !checkbox.id.match(/^clear_dir_/)) continue;
+		} checkbox.checked = check;
+	}
+
+}
+
+</script>
+<f:form action="performImport" method="post">
+	<f:if condition="{configuration.importSource.hasTablesToBeTruncated}">
+		<table class="mm_forum-list" cellspacing="0" cellpadding="2" style="width:100%">
+			<tr>
+				<td colspan="2" class="mm_forum-listrow_header" style="padding-left: 6px;">
+					Truncate tables
+				</td>
+			</tr><tr class="mm_forum-listrow">
+				<td colspan="2">
+					The {configuration.importSource.softwareName} import module would like to
+					truncate the following tables of the local TYPO3 database.
+				</td>
+			</tr>
+			<tr>
+				<td style="width:24px; text-align: center; padding: 2px 6px;">
+					<input type="checkbox" onclick="selectAll(this.checked, 'truncate')" id="select_all_truncate" checked="checked" />
+				</td><td style="padding: 2px 6px;">
+					<label for="select_all"><i>Select/deselect all</i></label>
+				</td>
+			</tr>
+			<f:for each="{configuration.importSource.tablesToBeTruncated}" as="table">
+				<tr>
+					<td style="width:24px; text-align: center; padding: 2px 6px;">
+						<f:form.checkbox name="truncateTables[]" value="{table}" checked="1" id="truncate_table_{table}" />
+					</td>
+					<td style="padding: 2px 6px;"><label for="truncate_table_{table}">{table}</label></td>
+				</tr>
+			</f:for>
+		</table>
+	</f:if>
+
+	<f:form.hidden name="action" value="performImport" id="nextAction" />
+	<f:form.hidden name="controller" value="Main" />
+
+	<input type="submit" value="{f:translate(key:'index.back')}" onclick="document.getElementById('nextAction').value = 'dataSource';" />
+	<input type="submit" value="{f:translate(key:'index.continue')}" onclick="document.getElementById('nextAction').value = 'performImport';" />
+</f:form>

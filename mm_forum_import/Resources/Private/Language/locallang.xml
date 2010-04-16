@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+    <meta type="array">
+        <description></description>
+        <type></type>
+        <csh_table></csh_table>
+        <labelContext type="array">
+        </labelContext>
+    </meta>
+    <data type="array">
+        <!-- ENGLISH LANGUAGE DATA -->
+        <languageKey index="default" type="array">
+            <label index="mod.menu.import">Data import</label>
+
+			<label index="index.introText">Please select a software from which you would like to import the forum data.</label>
+			<label index="index.tableHeader">Select source software</label>
+			<label index="index.continue">Continue</label>
+			<label index="index.back">Back</label>
+
+			<label index="datasource.title">Specify data source</label>
+			<label index="datasource.database.host">Database host</label>
+			<label index="datasource.database.username">Username</label>
+			<label index="datasource.database.password">Password</label>
+			<label index="datasource.database.name">Name</label>
+			<label index="datasource.database.prefix">Table name prefix</label>
+			<label index="datasource.database.driver">Database driver</label>
+
+			<label index="datasource.test.exception">
+				An exception occured while testing the database settings. Please go back
+				one step and have another look at your database settings.
+			</label>
+			<label index="datasource.pdo.exists">PDO extension is available.</label>
+			<label index="datasource.pdo.exists.failed">PDO extension is not available.</label>
+			<label index="datasource.pdo.driver">PDO driver for %s exists.</label>
+			<label index="datasource.pdo.driver.failed">PDO driver for %s does not exist.</label>
+
+			<label index="datasource.test.notset">No database connection was specified</label>
+			<label index="datasource.test.connection"><![CDATA[Successfully connected to host <i>%s</i> with user <i>%s</i>. DSN: <i>%s</i>]]></label>
+			<label index="datasource.test.connection.failed"><![CDATA[Could not connect to host <i>%s</i> with user <i>%s</i>. DSN: <i>%s</i>. Error: %s]]></label>
+			<label index="datasource.test.selection"><![CDATA[Successfully selected database <i>%s</i>.]]></label>
+			<label index="datasource.test.selection.failed"><![CDATA[Could not select database <i>%s</i>.]]></label>
+
+			<label index="datasource.test.databasetables.queryError">A SQL error occured while querying the import database.</label>
+			<label index="datasource.test.databasetables.loaded">The import database contains %d tables.</label>
+			<label index="datasource.test.databasetables.tableexists"><![CDATA[Required table <i>%s</i> exists.]]></label>
+			<label index="datasource.test.databasetables.tablenotexists"><![CDATA[Required table <i>%s</i> does not exist.]]></label>
+
+			<label index="filesource.title">Specify file import source</label>
+			<label index="filesource.type.local">Local access</label>
+			<label index="filesource.local.path">Path to %s installation</label>
+			<label index="filesource.type.ftp">FTP access</label>
+			<label index="filesource.ftp.host">Host name</label>
+			<label index="filesource.ftp.username">Username</label>
+			<label index="filesource.ftp.password">Password</label>
+			<label index="filesource.ftp.path">Path</label>
+
+			<label index="fileinterface.test.notset">No file system access method was specified.</label>
+			<label index="fileinterface.test.localpath"><![CDATA[Local directory <i>%s</i> exists.]]></label>
+			<label index="fileinterface.test.localpath.empty"><![CDATA[No file path was specified.]]></label>
+			<label index="fileinterface.test.localpath.failed"><![CDATA[Local directory <i>%s</i> does not exist.]]></label>
+			<label index="fileinterface.test.ftp"><![CDATA[Successfully established FTP connection to host <i>%s</i> with user <i>%s</i>.]]></label>
+			<label index="fileinterface.test.ftp.failed"><![CDATA[Could not establish FTP connection to host <i>%s</i> with user <i>%s</i>.]]></label>
+			<label index="fileinterface.test.exception">
+				An exception occured while testing the file import settings. Please go
+				back one step and have another look at your file import settings.
+			</label>
+			<label index="testfileinterface.success">The file import source was successfully validated.</label>
+
+			<label index="testdatasource.success">All prerequisites for the %s import are met. Please proceed with the next step.</label>
+			<label index="testdatasource.intro">
+				The import module will now test the connection to the database that is to be used as import source.
+				Furthermore, it will be checked, if the tables that are required for the import, are existing.
+			</label>
+        </languageKey>
+    </data>
+</T3locallang>
