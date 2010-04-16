@@ -8,6 +8,7 @@
 	<databaseRequirement>
 		<options>
 			<option name="queryPrefix">yes</option>
+			<option name="queryCharset">yes</option>
 		</options>
 		<requiredTables>
 			<table>###PREFIX###users</table>
