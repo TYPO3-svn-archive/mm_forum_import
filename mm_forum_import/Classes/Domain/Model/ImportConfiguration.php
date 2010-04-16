@@ -94,12 +94,6 @@ Class Tx_MmForumImport_Domain_Model_ImportConfiguration
 		 */
 	Private $settings = Array();
 
-		/**
-		 * The charset used in the source software.
-		 * @var string
-		 */
-	Private $sourceCharset = 'iso-8859-1';
-
 
 
 
@@ -327,7 +321,7 @@ Class Tx_MmForumImport_Domain_Model_ImportConfiguration
 		 *
 		 */
 
-	Public Function getSourceCharset() { Return $this->sourceCharset; }
+	Public Function getSourceCharset() { Return $this->databaseSettings->getCharset(); }
 
 
 

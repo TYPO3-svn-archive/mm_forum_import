@@ -10,6 +10,10 @@
 				</td>
 			</tr>
 			<tr class="mm_forum-listrow">
+				<td><f:translate key="datasource.database.driver" /></td>
+				<td><f:form.select name="database[driver]" options="{pdoDrivers}" value="{configuration.databaseSettings.driver}" /></td>
+			</tr>
+			<tr class="mm_forum-listrow">
 				<td><f:translate key="datasource.database.host" /></td>
 				<td><f:form.textbox name="database[hostname]" value="{configuration.databaseSettings.hostname}" /></td>
 			</tr>
@@ -31,10 +35,12 @@
 					<td><f:form.textbox name="database[prefix]" value="{configuration.databaseSettings.prefix}" /></td>
 				</tr>
 			</f:if>
-			<tr class="mm_forum-listrow">
-				<td><f:translate key="datasource.database.driver" /></td>
-				<td><f:form.select name="database[driver]" options="{pdoDrivers}" value="{configuration.databaseSettings.driver}" /></td>
-			</tr>
+			<f:if condition="{configuration.importSource.queryForCharset}">
+				<tr class="mm_forum-listrow">
+					<td><f:translate key="datasource.database.charset" /></td>
+					<td><f:form.textbox name="database[charset]" value="{configuration.databaseSettings.charset}" /></td>
+				</tr>
+			</f:if>
 		</table>
 	</f:if>
 

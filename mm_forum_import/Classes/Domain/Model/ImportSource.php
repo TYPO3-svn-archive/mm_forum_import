@@ -86,6 +86,12 @@ Class Tx_MmForumImport_Domain_Model_ImportSource Extends Tx_Extbase_DomainObject
 	Protected $hasDatabasePrefix  = FALSE;
 
 		/**
+		 * Determines, whether the import source database may have a different charset.
+		 * @var boolean
+		 */
+	Protected $queryForCharset    = FALSE;
+
+		/**
 		 * A list of database tables that are required for the import.
 		 * @var array
 		 */
@@ -199,6 +205,18 @@ Class Tx_MmForumImport_Domain_Model_ImportSource Extends Tx_Extbase_DomainObject
 
 		/**
 		 *
+		 * Determines whether the import module shall query for the charset that is used
+		 * in the import source database.
+		 * @return boolean TRUE, if a charset needs to be queried, otherwise FALSE.
+		 *
+		 */
+
+	Public Function getQueryForCharset() { Return $this->queryForCharset; }
+
+
+
+		/**
+		 *
 		 * Gets a list of database table that are required for the import.
 		 * @return Array A list of database table that are required for the import
 		 *
@@ -288,7 +306,7 @@ Class Tx_MmForumImport_Domain_Model_ImportSource Extends Tx_Extbase_DomainObject
 		 * @return array A list of all directories that are to be cleared before import
 		 *
 		 */
-	
+
 	Public Function getDirectoriesToBeCleared() { Return $this->clearDirectories; }
 
 }

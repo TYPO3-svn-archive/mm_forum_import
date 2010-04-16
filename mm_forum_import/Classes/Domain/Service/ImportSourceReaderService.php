@@ -34,7 +34,7 @@
 	 * @author     Martin Helmich <m.helmich@mittwald.de>
 	 * @copyright  2010 Martin Helmich, Mittwald CM Service GmbH & Co KG
 	 * @package    MmForumImport
-	 * @subpackage Service
+	 * @subpackage Domain_Service
 	 * @version    $Id$
 	 *
 	 */
@@ -124,6 +124,7 @@ Class Tx_MmForumImport_Domain_Service_ImportSourceReaderService {
 			'softwareIcon'          => $this->getNodeContent('//mmforum_import/software/icon'),
 			'dataSourceMode'        => $this->getNodeContent('//mmforum_import/software/importSource'),
 			'hasDatabasePrefix'     => $this->getNodeContent('//mmforum_import/databaseRequirement/options/option[@name="queryPrefix"]') == 'yes',
+			'queryForCharset'       => $this->getNodeContent('//mmforum_import/databaseRequirement/options/option[@name="queryCharset"]') == 'yes',
 			'requiredTableNames'    => $this->getNodeContentArray('//mmforum_import/databaseRequirement/requiredTables/table'),
 			'truncateTables'        => $this->getNodeContentArray('//mmforum_import/databaseRequirement/truncateTables/table'),
 			'importItems'           => $this->getNodeContentArray('//mmforum_import/import/importItems/importItem'),

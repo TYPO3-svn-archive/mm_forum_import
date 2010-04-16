@@ -20,19 +20,18 @@ function selectAll(check, mode) {
 		<table class="mm_forum-list" cellspacing="0" cellpadding="2" style="width:100%">
 			<tr>
 				<td colspan="2" class="mm_forum-listrow_header" style="padding-left: 6px;">
-					Truncate tables
+					<f:translate key="truncate.title" />
 				</td>
 			</tr><tr class="mm_forum-listrow">
 				<td colspan="2">
-					The {configuration.importSource.softwareName} import module would like to
-					truncate the following tables of the local TYPO3 database.
+					<f:translate key="truncate.intro" arguments="{0 : configuration.importSource.softwareName}" />
 				</td>
 			</tr>
 			<tr>
 				<td style="width:24px; text-align: center; padding: 2px 6px;">
 					<input type="checkbox" onclick="selectAll(this.checked, 'truncate')" id="select_all_truncate" checked="checked" />
 				</td><td style="padding: 2px 6px;">
-					<label for="select_all"><i>Select/deselect all</i></label>
+					<label for="select_all"><i><f:translate key="truncate.selectAll" /></i></label>
 				</td>
 			</tr>
 			<f:for each="{configuration.importSource.tablesToBeTruncated}" as="table">

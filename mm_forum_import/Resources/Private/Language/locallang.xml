@@ -24,6 +24,7 @@
 			<label index="datasource.database.name">Name</label>
 			<label index="datasource.database.prefix">Table name prefix</label>
 			<label index="datasource.database.driver">Database driver</label>
+			<label index="datasource.database.charset">Character set</label>
 
 			<label index="datasource.test.exception">
 				An exception occured while testing the database settings. Please go back
@@ -34,6 +35,7 @@
 			<label index="datasource.pdo.driver">PDO driver for %s exists.</label>
 			<label index="datasource.pdo.driver.failed">PDO driver for %s does not exist.</label>
 
+			<label index="datasource.test.title">Database connection test results</label>
 			<label index="datasource.test.notset">No database connection was specified</label>
 			<label index="datasource.test.connection"><![CDATA[Successfully connected to host <i>%s</i> with user <i>%s</i>. DSN: <i>%s</i>]]></label>
 			<label index="datasource.test.connection.failed"><![CDATA[Could not connect to host <i>%s</i> with user <i>%s</i>. DSN: <i>%s</i>. Error: %s]]></label>
@@ -54,6 +56,7 @@
 			<label index="filesource.ftp.password">Password</label>
 			<label index="filesource.ftp.path">Path</label>
 
+			<label index="fileinterface.test.title">File interface test results</label>
 			<label index="fileinterface.test.notset">No file system access method was specified.</label>
 			<label index="fileinterface.test.localpath"><![CDATA[Local directory <i>%s</i> exists.]]></label>
 			<label index="fileinterface.test.localpath.empty"><![CDATA[No file path was specified.]]></label>
@@ -71,6 +74,15 @@
 				The import module will now test the connection to the database that is to be used as import source.
 				Furthermore, it will be checked, if the tables that are required for the import, are existing.
 			</label>
+
+			<label index="truncate.title">Truncate tables</label>
+			<label index="truncate.intro">
+				The %s import module would like to truncate the following tables of the
+				local TYPO3 database.
+			</label>
+			<label index="truncate.selectAll">Select/deselect all</label>
+
+			<label index="perform.title">Perform %s import</label>
         </languageKey>
     </data>
 </T3locallang>

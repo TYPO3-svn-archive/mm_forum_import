@@ -90,6 +90,12 @@ Class Tx_MmForumImport_Domain_Model_ImportConfiguration_Database
 		 */
 	Private $driver = 'mysql';
 
+		/**
+		 * The source database charset.
+		 * @var string
+		 */
+	Private $charset = 'utf-8';
+
 
 
 
@@ -117,7 +123,7 @@ Class Tx_MmForumImport_Domain_Model_ImportConfiguration_Database
 			Return NULL;
 		Return New Tx_MmForumImport_Domain_Model_ImportConfiguration_Database (
 				$database['hostname'], $database['username'], $database['password'],
-				$database['dbname'], $database['prefix'], $database['driver'] );
+				$database['dbname'], $database['prefix'], $database['driver'], $database['charset'] );
 	}
 
 
@@ -133,13 +139,15 @@ Class Tx_MmForumImport_Domain_Model_ImportConfiguration_Database
 		 * @param string $prefix   The table name prefix.
 		 *
 		 */
-	Public Function __construct($hostname, $username, $password, $dbname, $prefix=NULL, $driver='mysql') {
+
+	Public Function __construct($hostname, $username, $password, $dbname, $prefix=NULL, $driver='mysql', $charset='utf-8') {
 		$this->hostname = $hostname;
 		$this->username = $username;
 		$this->password = $password;
 		$this->dbname = $dbname;
 		$this->prefix = $prefix;
 		$this->driver = $driver;
+		$this->charset = $charset ? $charset : 'utf-8';
 	}
 
 
@@ -193,6 +201,7 @@ Class Tx_MmForumImport_Domain_Model_ImportConfiguration_Database
 		 * @return string The database name
 		 *
 		 */
+
 	Public Function getDatabaseName() { Return $this->dbname; }
 
 
@@ -221,12 +230,23 @@ Class Tx_MmForumImport_Domain_Model_ImportConfiguration_Database
 
 		/**
 		 *
+		 * Gets the import source database charset.
+		 * @return string The import source database charset
+		 *
+		 */
+
+	Public Function getCharset() { Return $this->charset; }
+
+
+
+		/**
+		 *
 		 * Gets the Data Source Name -- short DSN -- for this database connection. This
 		 * DNS is for example used by PHP's PDO extension.
 		 * @return string The DSN
 		 *
 		 */
-	
+
 	Public Function getDSN() {
 		If($this->driver == 'sqlite' || $this->driver == 'sqlite2')
 			Return $this->driver.':'.$this->getDatabaseName();
