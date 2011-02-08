@@ -155,7 +155,7 @@ Class Tx_MmForumImport_Controller_MainController Extends Tx_Extbase_MVC_Controll
 			$importSource = $this->importSourceRepository->findByUid($selectedSourceIdentifier);
 			session_start();
 			$this->importConfiguration = New Tx_MmForumImport_Domain_Model_ImportConfiguration($importSource);
-			$this->importConfiguration->injectSettings($this->settings);
+			$this->importConfiguration->injectSettings((Array)$this->settings);
 			$_SESSION['mm_forum_import']['configuration'] =& $this->importConfiguration;
 		}
 
