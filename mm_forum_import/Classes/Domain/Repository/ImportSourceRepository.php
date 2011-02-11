@@ -143,6 +143,11 @@ Class Tx_MmForumImport_Domain_Repository_ImportSourceRepository
 
 	Public Function remove($object) { Throw New Exception("This operation is not supported!"); }
 
+	Public Function replace($existingObject, $newObject) { Throw New Exception("This operation is not supported!"); }
+
+	Public Function update($object) { Throw New Exception("This operation is not supported!"); }
+
+	Public Function removeAll() { Throw New Exception("This operation is not supported!"); }
 
 
 		/**
@@ -166,6 +171,14 @@ Class Tx_MmForumImport_Domain_Repository_ImportSourceRepository
 		 */
 
 	Public Function getRemovedObjects() { Return Array(); }
+
+	Public Function createQuery() { Throw New Exception("This operation is not supported!"); }
+
+	Public Function setDefaultOrderings(array $defaultOrderings) { Throw New Exception("This operation is not supported!"); }
+
+	Public Function setDefaultQuerySettings(Tx_Extbase_Persistence_QuerySettingsInterface $defaultQuerySettings) {
+		Throw New Exception("This operation is not supported!");
+	}
 
 
 
@@ -221,6 +234,11 @@ Class Tx_MmForumImport_Domain_Repository_ImportSourceRepository
 
 		Return $importSource;
 	}
+
+	Public Function countAll() {
+		Return count(glob(t3lib_extMgm::extPath('mm_forum_import').'Configuration/ImportSources/*.xml'));
+	}
+
 
 }
 
