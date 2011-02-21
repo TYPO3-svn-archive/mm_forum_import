@@ -30,9 +30,7 @@ mod.web_txmmforumM1.sections.400.handler.settings {
 
 [compatVersion = 4.5]
 
-mod.web_txmmforumM1.sections.400.handler = Tx_Extbase_Core_Bootstrap->callModule
-mod.web_txmmforumM1.sections.400.handler.settings {
-	moduleKey = MmForumImportMmforum_MmForumImportM1
-}
+mod.web_txmmforumM1.sections.400.handler = EXT:mm_forum_import/Classes/Bootstrap.php:tx_MmForumImport_Bootstrap->run
+mod.web_txmmforumM1.sections.400.handler.settings >
 
 [global]

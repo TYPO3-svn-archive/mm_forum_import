@@ -28,105 +28,37 @@
 
 	/**
 	 *
-	 * Abstract base class for file interfaces. This class contains basic file system
-	 * access logic and defines the interfaces to retrieve files from a variety of
-	 * remote sources.
+	 * Bootstrapping class for rendering the import module. This is necessary
+	 * due to the changes in the Extbase API in version 1.3.0.
 	 *
 	 * @author     Martin Helmich <m.helmich@mittwald.de>
 	 * @copyright  2010 Martin Helmich, Mittwald CM Service GmbH & Co KG
 	 * @package    MmForumImport
-	 * @subpackage Service_FileInterface
+	 * @subpackage Controller
 	 * @version    $Id$
 	 *
 	 */
 
-Abstract Class Tx_MmForumImport_Domain_Service_FileInterface_AbstractFileInterface {
-
-
-
-
-
-		/*
-		 * ATTRIBUTES
-		 */
-
-
-
-
-
-		/**
-		 * The path to the local TYPO3 installation.
-		 * @var string
-		 */
-	Protected $typo3path = PATH_site;
-
-
-
-
-
-		/*
-		 * CONSTRUCTOR
-		 */
-
-
+Class tx_MmForumImport_Bootstrap Extends Tx_Extbase_Core_Bootstrap {
 
 
 
 		/**
 		 *
-		 * Creates a new instance of this service.
+		 * Runs the mm_forum import module. This method basically does nothing
+		 * else than calling the parent run method with modified parameters.
+		 *
+		 * @param  String $content       The plugin content. Can be emptry.
+		 * @param  Array  $configuration The configuration.
+		 * @return String                HTML content.
 		 *
 		 */
 
-	Public Function __construct() {}
+	Public Function run($content, $configuration) {
+		$configuration['extensionName'] = 'MmForumImport';
+		$configuration['pluginName'] = 'MmForumImportMmforum_MmForumImportM1';
 
-
-
-
-
-		/*
-		 * ABSTRACT INTERFACE DEFINITIONS
-		 */
-
-
-
-
-
-		/**
-		 *
-		 * Retrieve a file from any location to a local directory.
-		 *
-		 * @param  string $source      The source filename
-		 * @param  string $destination The target filename
-		 * @return void
-		 *
-		 */
-
-	Abstract Public Function retrieveFile($source, $destination);
-
-
-
-
-
-		/*
-		 * HELPER METHODS
-		 */
-
-
-
-
-
-		/**
-		 *
-		 * Recursively creates the parent directory of a file.
-		 * @param  string $fileName The filename
-		 * @return void
-		 *
-		 */
-
-	Protected Function createParentDirectory($fileName) {
-		$dirName = dirname($fileName);
-		mkdir($dirName, 0777, TRUE);
+		Return parent::run($content, $configuration);
 	}
 
 }

@@ -28,9 +28,7 @@
 
 	/**
 	 *
-	 * Abstract base class for file interfaces. This class contains basic file system
-	 * access logic and defines the interfaces to retrieve files from a variety of
-	 * remote sources.
+	 * Factory class for creating file interface classes.
 	 *
 	 * @author     Martin Helmich <m.helmich@mittwald.de>
 	 * @copyright  2010 Martin Helmich, Mittwald CM Service GmbH & Co KG
@@ -40,93 +38,40 @@
 	 *
 	 */
 
-Abstract Class Tx_MmForumImport_Domain_Service_FileInterface_AbstractFileInterface {
+Class Tx_MmForumImport_Domain_Service_FileInterface_FileInterfaceFactory {
 
 
-
-
-
-		/*
-		 * ATTRIBUTES
-		 */
-
-
-
-
-
-		/**
-		 * The path to the local TYPO3 installation.
-		 * @var string
-		 */
-	Protected $typo3path = PATH_site;
-
-
-
-
-
-		/*
-		 * CONSTRUCTOR
-		 */
-
-
-
-
-
+	
 		/**
 		 *
-		 * Creates a new instance of this service.
+		 * Creates a file interface instance for a specific file interface
+		 * configuration. This may either be a local file connection or an FTP
+		 * connection (maybe we'll implement additional interfaces in the future,
+		 * like SSH, HTTP or who-knows-what...?).
+		 *
+		 * @param  Tx_MmForumImport_Domain_Model_ImportConfiguration_FileInterface $fileInterfaceConfiguration
+		 *                             The file interface configuration
+		 * @return Tx_MmForumImport_Domain_Service_FileInterface_AbstractFileInterface
+		 *                             A file interface.
 		 *
 		 */
 
-	Public Function __construct() {}
-
-
-
-
-
-		/*
-		 * ABSTRACT INTERFACE DEFINITIONS
-		 */
-
-
-
-
-
-		/**
-		 *
-		 * Retrieve a file from any location to a local directory.
-		 *
-		 * @param  string $source      The source filename
-		 * @param  string $destination The target filename
-		 * @return void
-		 *
-		 */
-
-	Abstract Public Function retrieveFile($source, $destination);
-
-
-
-
-
-		/*
-		 * HELPER METHODS
-		 */
-
-
-
-
-
-		/**
-		 *
-		 * Recursively creates the parent directory of a file.
-		 * @param  string $fileName The filename
-		 * @return void
-		 *
-		 */
-
-	Protected Function createParentDirectory($fileName) {
-		$dirName = dirname($fileName);
-		mkdir($dirName, 0777, TRUE);
+	Public Function createFileInterface(Tx_MmForumImport_Domain_Model_ImportConfiguration_FileInterface $fileInterfaceConfiguration) {
+		$fileInterface = NULL;
+		Switch($fileInterfaceConfiguration->getType()) {
+			Case Tx_MmForumImport_Domain_Model_ImportConfiguration_FileInterface::TYPE_LOCAL:
+				$fileInterface =
+					New Tx_MmForumImport_Domain_Service_FileInterface_LocalFileInterface (
+						$fileInterfaceConfiguration->getLocalPath() );
+				Break;
+			Case Tx_MmForumImport_Domain_Model_ImportConfiguration_FileInterface::TYPE_FTP:
+				$fileInterface = New Tx_MmForumImport_Domain_Service_FileInterface_FTPFileInterface (
+					$fileInterfaceConfiguration->getFtpHostname(),
+					$fileInterfaceConfiguration->getFtpUsername(),
+					$fileInterfaceConfiguration->getFtpPassword(),
+					$fileInterfaceConfiguration->getFtpPath() );
+				Break;
+		} Return $fileInterface;
 	}
 
 }

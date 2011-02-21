@@ -1,3 +1,9 @@
+2011-02-21  Martin Helmich <m.helmich@mittwald.de>
+
+	* [#BUGFIX]: File import source gets overwritten by dummy value (fixed issue #13232)
+	* [#BUGFIX]: Refactored bootstrapping logic into own class (improved compatibility with TYPO3 4.5)
+	* [#BUGFIX]: Added constructor to AbstractFileInterface classes (fixed issue #10072)
+
 2011-02-11  Martin Helmich <m.helmich@mittwald.de>
 
 	* Release of mm_forum_import 1.0.1

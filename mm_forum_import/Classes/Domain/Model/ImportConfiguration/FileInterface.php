@@ -45,6 +45,28 @@ Class Tx_MmForumImport_Domain_Model_ImportConfiguration_FileInterface Extends Tx
 
 
 		/*
+		 * CONSTANTS
+		 */
+
+
+
+
+
+		/**
+		 * Local file import.
+		 */
+	Const TYPE_LOCAL = 'local';
+
+		/*
+		 * FTP file import
+		 */
+	Const TYPE_FTP   = 'ftp';
+
+
+
+
+
+		/*
 		 * ATTRIBUTES
 		 */
 
@@ -115,7 +137,7 @@ Class Tx_MmForumImport_Domain_Model_ImportConfiguration_FileInterface Extends Tx
 		If(!$fileInterfaceConfiguration['mode']) Return NULL;
 		Return New Tx_MmForumImport_Domain_Model_ImportConfiguration_FileInterface (
 			$fileInterfaceConfiguration['mode'],
-			$fileInterfaceConfiguration['mode'] == 'ftp'
+			$fileInterfaceConfiguration['mode'] == self::TYPE_FTP
 				? $fileInterfaceConfiguration['ftp']['path'] : $fileInterfaceConfiguration['local']['path'],
 			$fileInterfaceConfiguration['ftp']['host'],
 			$fileInterfaceConfiguration['ftp']['username'],
@@ -138,11 +160,11 @@ Class Tx_MmForumImport_Domain_Model_ImportConfiguration_FileInterface Extends Tx
 
 	Public Function __construct($type, $path, $hostname=NULL, $username=NULL, $password=NULL) {
 		Switch($type) {
-			Case 'local':
+			Case self::TYPE_LOCAL:
 				$this->path = $path;
 				If(substr($this->path, -1) != '/') $this->path .= '/';
 				Break;
-			Case 'ftp':
+			Case self::TYPE_FTP:
 				$this->ftpPath = $path;
 				If(substr($this->ftpPath, -1) != '/') $this->ftpPath .= '/';
 				$this->ftpHost = $hostname;
@@ -181,7 +203,7 @@ Class Tx_MmForumImport_Domain_Model_ImportConfiguration_FileInterface Extends Tx
 		 *
 		 */
 
-	Public Function getIsFtp() { Return $this->type == 'ftp'; }
+	Public Function getIsFtp() { Return $this->type == self::TYPE_FTP; }
 
 
 
@@ -192,7 +214,7 @@ Class Tx_MmForumImport_Domain_Model_ImportConfiguration_FileInterface Extends Tx
 		 *
 		 */
 
-	Public Function getIsLocal() { Return $this->type == 'local'; }
+	Public Function getIsLocal() { Return $this->type == self::TYPE_LOCAL; }
 
 
 

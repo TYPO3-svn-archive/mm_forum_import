@@ -162,7 +162,8 @@ Abstract Class Tx_MmForumImport_Domain_Service_Import_AbstractImporter {
 		$this->remoteDatabase->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 		$this->importItems = $importConfiguration->getImportSource()->getImportItems();
 
-		$this->fileInterface = New Tx_MmForumImport_Domain_Service_FileInterface_LocalFileInterface('/var/www/phpbb/');
+		$fileInterfaceFactory = New Tx_MmForumImport_Domain_Service_FileInterface_FileInterfaceFactory();
+		$this->fileInterface = $fileInterfaceFactory->createFileInterface($importConfiguration->getFileinterfaceSettings());
 
 		$this->prefix = $this->importConfiguration->getDatabaseSettings()->getPrefix();
 	}
